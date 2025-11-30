@@ -150,11 +150,11 @@ function onChangePassword() {
       </NameRow>
 
       {profile.social && (
-        <LinkRow href={profile.social.url} target="_blank" rel="noreferrer">
-          <LinkIcon />
-          {profile.social.label}
-        </LinkRow>
-      )}
+  <LinkRow href={profile.social.url} target="_blank" rel="noreferrer">
+    <LinkIcon />
+    {profile.social.label}
+  </LinkRow>
+)}
 
       <Groups>
         {profile.groups.map((g, i) => (
