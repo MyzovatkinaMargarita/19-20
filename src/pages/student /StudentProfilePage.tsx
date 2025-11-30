@@ -1,6 +1,9 @@
+import { LinkIcon } from "../../icons/icons";
+
 export default function StudentProfilePage() {
   return <div>Профиль</div>;
 }
+
 type GroupTag = { code: string; course: string; track: string };
 type ProfileData = {
   fullName: string;
@@ -106,7 +109,72 @@ const Btn = styled.button`
   transition: background-color 0.15s ease;
 
   &:hover { background: #f9fafb; }
+
+ 
+
+  const [profile] = useState<ProfileData>({
+  fullName: "Фильченко Диана Игоревна",
+  nick: "код",
+  avatarUrl:
+    "https://images.unsplash.com/photo-1606335543042-57c525922933?q=80&w=640&auto=format&fit=facearea&facepad=3&h=640",
+  social: { label: "vk.com/id565257045", url: "https://vk.com/id565257045" },
+  groups: [
+    { code: "КД18", course: "2 курс", track: "UX/UI" },
+    { code: "КД18", course: "2 курс", track: "Frontend" },
+  ],
+});
+
   &:disabled { cursor: not-allowed; opacity: 0.6; }
 `;
+Решение:
+function onChangePassword() {
+  // TODO: открыть модальное окно смены пароля
+}
+
+<>
+  <StudentHeader title="Профиль" />
+
+  <Block>
+    <div>
+      <AvatarBox>
+        {profile.avatarUrl ? (
+          <img src={profile.avatarUrl} alt={profile.fullName} />
+        ) : null}
+      </AvatarBox>
+    </div>
+
+    <InfoCol>
+      <NameRow>
+        <FullName>{profile.fullName}</FullName>
+        {profile.nick && <Badge>{profile.nick}</Badge>}
+      </NameRow>
+
+      {profile.social && (
+        <LinkRow href={profile.social.url} target="_blank" rel="noreferrer">
+          <LinkIcon />
+          {profile.social.label}
+        </LinkRow>
+      )}
+
+      <Groups>
+        {profile.groups.map((g, i) => (
+          <GroupLine key={`${g.code}-${i}`}>
+            <span className="code">{g.code}</span>
+            <Dot />
+            <span className="muted">{g.course}</span>
+            <Dot />
+            <span className="muted">{g.track}</span>
+          </GroupLine>
+        ))}
+      </Groups>
+
+      <Actions>
+        <Btn disabled>Поменять фото</Btn>
+        <Btn onClick={onChangePassword}>Изменить пароль</Btn>
+      </Actions>
+    </InfoCol>
+  </Block>
+</>
+
 
 
